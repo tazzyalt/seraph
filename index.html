@@ -1,281 +1,936 @@
+<!DOCTYPE html>
 <html lang="en">
-    <head>
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-7FN7LEVWXD"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Jaxson's Math</title>
+  
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+  
+  <style>
+    :root {
+      --accent: #ff4f4f;
+      --bg1: #1a1a1a;
+      --bg2: #2a2a2a;
+      --bg3: #3a3a3a;
+    }
 
-          gtag('config', 'G-7FN7LEVWXD');
-        </script>
+    * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Comfortaa', sans-serif;
+      background: #0f0f0f;
+      color: white;
+      height: 100vh;
+      overflow: hidden;
+      padding: 12px;
+      display: flex;
+      align-items: stretch;
+    }
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="shortcut icon" href="/images/ico.ico" type="image/x-icon">
-        <link rel="stylesheet" href="/storage/css/index.css">
-        <title>Home | Seraph</title>
+    #app-fuk-u {
+      width: 100%;
+      height: 100%;
+      background: var(--bg1);
+      display: flex;
+      border-radius: 28px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      opacity: 0;
+      transition: opacity 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    }
 
-        <meta name="description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-        <meta property="og:site_name" content="seraph">
-        <meta property="og:title" content="seraph">
-        <meta property="og:type" content="website">
-        <meta property="og:description" content="an open source games site hosting 500+ games, useful utilities, powerful settings + a clean user interface">
-  </head>
-  <body>
+    #app-fuk-u.loaded {
+      opacity: 1;
+    }
+
+    .cac-sidebar {
+      width: 19vw;
+      background: var(--bg2);
+      padding: 1.2vw 1.2vw 1.2vw 1.2vw;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      border-radius: 24px;
+      height: 100%;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.7s cubic-bezier(0.23, 1, 0.32, 1);
+      flex-shrink: 0;
+    }
+
+    .cac-sidebar.loaded {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .cac-header {
+      background: url('https://github.com/tazzyalt/jaxsonsmath/blob/main/logo.png?raw=true') center/cover;
+      width: 100%;
+      aspect-ratio: 5/2;
+      border-radius: 16px;
+      margin-bottom: 2.6vw;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cac-header::after {
+      content: "Jaxson's Math";
+      font-size: 1.55vw;
+      font-weight: 900;
+      color: white;
+      text-align: center;
+      text-shadow: 0 2px 10px rgba(0,0,0,0.9);
+    }
+
+    .sidebar-container {
+      position: relative;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+    }
+
+    .nav-top { 
+      flex: 1; 
+      display: flex; 
+      flex-direction: column; 
+      padding-top: 0.4vw;
+    }
     
-     <div id="blackout"></div>
-     <div id="updPopup">
-        <img src="/images/other/v10image.jpg" style="width: 90%;">
-        <br><br>
-        <h2 style="font-size: 28px; text-decoration: underline;">version 10 / patch notes</h2>
+    .nav-bottom { 
+      margin-top: auto; 
+      padding-bottom: 0.4vw;
+    }
 
-        <div id="updContent">
-            <ul style="text-align: left;">
-                <li>offline mode
-                  <ul>
-                    <li>download 200+ games from the site by clicking the download button to the left of them</li>
-                    <li>after one game is downloaded, loading the site without an internet connection will send you to an offline version on the site where you can access downloaded games</li>
-                    <li>supports ruffle/flash + works seamlessly with compatible games</li>
-                  </ul>
-                </li>
-                <li>added 132 games
-                            <li>sega genesis: comix zone, ecco the dolphin, gunstar heroes, phantasy star iv, ranger x, ristar, shining force, shinobi iii, sonic the hedgehog, sonic the hedgehog 2, streets of rage 2, vectorman, vectorman 2</li>
-                            <li>game boy: kirby’s dreamland 2, link’s awakening dx, metroid ii, super mario land 2, warioland ii, castlevania: aria of sorrow, final fantasy tactics advance, drill dozer, pokemon yellow</li>
-                            <li>nes: battle toads, castlevania iii, contra, duck tales, kid icarus, mega man 2, ninja gaiden, mike tyson’s punch out</li>
-                            <li>snes: chrono trigger, contra iii, donkey kong country 3, earthbound, final fantasy iv, f-zero, super metroid, illusion of gaia</li>
-                            <li>n64: banjo tooie, harvest moon 64, jet force gemini, mystical ninja, turok dinosaur hunter, yoshi’s story</li>
-                            <li>nintendo ds: advance wars: days of ruin, castlevania: dawn of sorrow, castlevania: order of ecclesia, mario and luigi: partners in time</li>
-                        </li>
-                        <li>flash games: abuda the alien, battle beavers, controlcraft 2, age of war, age of war 2, amorphous, bubble spinner, crush the castle, crush the castle 2, epic battle fantasy, epic battle fantasy 2, epic battle fantasy 3, fancy pants adventure 3, flood runner 2, flood runner 3, dragon boy 2, neon rider, pandemic 2, stick war, stick war 2, ultimate flash sonic, zombocalpyse, zombotron, zombotron 2, three line, bike champ, bike champ 2, corporation inc, shop empire fable, wubzzy’s amazing adventure</li>
-                        <li>nitrome games: canopy, cave chaos, changetype(), cheese dreams, chisel, chisel 2, ditto, feed me, final ninja, frost bite, frost bite 2, ice breaker, mutiny, nitrome must die, oodlegobs, super treadmill, swindler, test subject arena, test subject complete, twin shot, twin shot 2</li>
-                        <li>flipline games: cactus mccoy, cactus mccoy 2, papa louie, papa louie 2, papa louie 3, steak and jake, steak and jake: midnight march</li>
-                        <li>other games: backrooms 2d, basket random, csgo clicker, doom, funny shooter 2, gun fest, infinite craft, lows adventures 2, pako highway, recoil, run 3 plus, slope city, state io, sudoku, superhero drop, balloon run, crazy tunnel 3d, eaglercraft 1.8, geometry dash sky, gold digger frvr, hexgl, house of hazards, pick crafter, precision client, subway runner, xx142-b2.exe</li>
-                      </ul>
-                    </li>
-                    <li>added 4 apps:</li>
-                      <ul>
-                        <li>calculator: a simple calculator, allowing you to perform simple addition, subtraction, multiplication and division</li>
-                        <li>etch a sketch: create digital pixel drawings - mimicking the experience of an etch-a-sketch with quality of life features</li>
-                        <li>zip opener: directly upload and view/download individual files inside a zip archive</li>
-                        <li>godoblocks: a mimick of the 2005 roblox beta era - recreated entirely in godot</li>
-                      </ul>
-                    </li>
-                    <li>fixed friday night funkin & drift hunters</li>
-                  </ul>
-                </li>
-                <br>
-                <li>settings overhaul
-                  <ul>
-                    <li>new data management section
-                      <ul>
-                        <li>import/export data into save files, allowing for transfer over multiple sites</li>
-                        <li>clear all data off the site with the clear data button</li>
-                      </ul>
-                    </li>
-                    <li>new panic mode
-                      <ul>
-                        <li>customise a panic key (defaults to ctrl+shift+p)</li>
-                        <li>customise a panic url (defaults to https://www.desmos.com/scientific)</li>
-                        <li>perform the shortcut on any page to instantly delete all contents of the site and redirect to the panic url</li>
-                      </ul>
-                    </li>
-                    <li>custom theme updates
-                      <ul>
-                        <li>added ability to export and import custom themes directly into the site, allowing for ease of access switching + sharability</li>
-                        <li>custom themes now do not require a refresh of the page every time</li>
-                      </ul>
-                    </li>
-                    <li>new theme: ghostly - an abandoned town, said to be haunted by spirits lurking within</li>
-                    <li>added open games in same tab setting</li>
-                    <li>fixed tab cloaking not working on lots of pages, now works globally</li>
-                    <li>tab cloak and resetting auto applies now with page refresh</li>
-                    <li>removed tooltips to condense space</li>
-                    <li>significantly improved animation</li>
-                  </ul>
-                </li>
-                <li>seraphim - mobile update
-                  <ul>
-                    <li>mobile version is now detachable from seraph and can be hosted separately</li>
-                    <li>converted games and apps from buttons to app icons for a more unique interface</li>
-                    <li>blurred all theme backgrounds to help contrast content more on smaller screens</li>
-                    <li>now integratable with ios! open seraphim in safari > more > add to home page</li>
-                    <li>setting bars now stack instead of appearing next to each other</li>
-                    <li>games are now sorted in alphabetical order</li>
-                    <li>custom themes are now compatible with mobile mode</li>
-                    <li>mobile now uses new and consolidated stylesheet</li>
-                    <li>scripts on page now execute in one instead of being fragmented</li>
-                    <li>removed games/apps opening in a blank tab</li>
-                    <li>adjusted meta tags to fit the site</li>
-                  </ul>
-                </li>
-                <li>updates page
-                  <ul>
-                    <li>update log page is now a dropdown menu instead of a long page - scales down from version 10 all the way to version 1</li>
-                    <li>improved animation on page load</li>
-                    <li>fixed header glowing bug on page, making a weird background effect</li>
-                  </ul>
-                </li>
-                <li>other changes
-                  <ul>
-                    <li>homepage now has dedicated big settings button</li>
-                    <li>shrunk down app size slightly</li>
-                    <li>added update popup for whenever there is a new update - shown on the homepage</li>
-                    <li>404 page now has a previous page button</li>
-                    <li>fixed errors with 404 page styling, images and fonts</li>
-                    <li>fixed errors with 404 linkbar links redirecting to wrong parts of the site</li>
-                    <li>mobile users are now not automatically redirected to the mobile friendly version of the site on the homepage</li>
-                    <li>background image bandwidth has been significantly downgraded by 50-90%</li>
-                    <li>game thumbnails total bandwidth reduced significantly (19.2mb > 2.2mb)</li>
-                    <li>favicon is now improved to give a more rounded design</li>
-                    <li>fixed homepage size on mozilla browsers</li>
-                    <li>star/cross icon is now an image icon instead of using unicode characters</li>
-                    <li>themes.css now is used in place of having all stylesheets have different schemes</li>
-                    <li>polished readme file, adding more content to it and removing unnecessary information</li>
-                    <li>changed placeholder image (displays when there is no current thumbnail for a game)</li>
-                    <li>css stylesheets have been renamed to make it easier to sort through</li>
-                  </ul>
-                </li>
-              </ul>        
+    .cac-sidebar-button {
+      width: 100%;
+      height: 3.4vw;
+      margin: 0.35vw 0;
+      padding: 0 1.3vw;
+      display: flex;
+      align-items: center;
+      font-size: 1.42vw;
+      font-weight: 600;
+      color: white;
+      cursor: pointer;
+      border-radius: 9999px;
+      transition: all 0.25s ease;
+      position: relative;
+      z-index: 2;
+    }
+
+    .cac-sidebar-button i { 
+      width: 32px; 
+      margin-right: 10px; 
+      font-size: 1.5vw; 
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .cac-sidebar-background {
+      position: absolute;
+      background: var(--accent);
+      width: calc(100% - 1.2vw);
+      height: 3.4vw;
+      border-radius: 9999px;
+      left: 0.6vw;
+      transition: top 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+      z-index: 1;
+    }
+
+    .main-wrapper {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 0;
+      position: relative;
+    }
+
+    .maincontent {
+      position: absolute;
+      inset: 0;
+      background: var(--bg2);
+      margin: 0.8vw;
+      border-radius: 20px;
+      padding: 1.8vw 2.2vw;
+      overflow-y: auto;
+      opacity: 0;
+      transform: translateY(30px);
+      pointer-events: none;
+      transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    .maincontent.active {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: all;
+      z-index: 2;
+    }
+
+    .maincontent-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: 0.8vw;
+    }
+
+    .maincontent-header-text {
+      font-size: 2.6vw;
+      font-weight: 700;
+    }
+
+    .page-description {
+      font-size: 1.1vw;
+      opacity: 0.85;
+      text-align: right;
+      margin-top: 0.4rem;
+    }
+
+    .search-container {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 2.2vw;
+      align-items: center;
+    }
+
+    #searchInput {
+      background: #252525;
+      border: 2px solid #444;
+      color: white;
+      padding: 1rem 1.4rem;
+      border-radius: 9999px;
+      flex: 1;
+      font-family: 'Comfortaa', sans-serif;
+      font-size: 1.1vw;
+    }
+
+    #searchInput:focus {
+      outline: none;
+    }
+
+    #searchInput::placeholder {
+      color: white;
+      opacity: 0.75;
+    }
+
+    #categorySelect {
+      background: #252525 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16' fill='none' stroke='%23ffffff' stroke-width='2.5' stroke-linejoin='round' stroke-linecap='round'%3E%3Cpolyline points='4 6 8 10 12 6'/%3E%3C/svg%3E") no-repeat right 1.1rem center;
+      border: 2px solid #444;
+      color: white;
+      padding: 1rem 3.2rem 1rem 1.4rem;
+      border-radius: 9999px;
+      font-family: 'Comfortaa', sans-serif;
+      font-size: 1.1vw;
+      cursor: pointer;
+      min-width: 190px;
+      appearance: none;
+      background-size: 16px;
+      transition: all 0.3s ease;
+    }
+
+    #categorySelect:focus {
+      background-color: #2a2a2a;
+      outline: none;
+    }
+
+    #gameGallery, #recentGallery {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .game-card {
+      background: var(--bg3);
+      padding: 1.5rem 1.4rem;
+      border-radius: 16px;
+      text-align: left;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      color: white;
+    }
+
+    .game-card:hover {
+      background: #4a4a4a;
+      filter: brightness(1.15);
+      transform: translateY(-4px) scale(1.02);
+    }
+
+    .section-title {
+      font-size: 1.8vw;
+      margin: 2.4rem 0 1.2rem 0;
+      font-weight: 600;
+    }
+
+    .setting-card, .credits-card {
+      background: var(--bg3);
+      padding: 1.4rem 1.4rem;
+      border-radius: 16px;
+      margin-bottom: 1.2rem;
+      text-align: left;
+    }
+
+    .cac-input, .cac-button {
+      background: #4a4a4a;
+      border: none;
+      color: white;
+      padding: 0.9rem 1.2rem;
+      border-radius: 12px;
+      margin: 8px 0;
+      font-family: 'Comfortaa', sans-serif;
+      transition: all 0.2s ease;
+    }
+
+    .cac-button:hover {
+      background: #555;
+      filter: brightness(1.2);
+      transform: scale(1.03);
+    }
+
+    #gameHeader button {
+      background: transparent;
+      border: none;
+      color: white;
+      font-size: 1.4rem;
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: all 0.2s ease;
+      padding: 0;
+    }
+
+    #gameHeader button:hover {
+      background: rgba(255,255,255,0.1);
+      transform: scale(1.1);
+    }
+
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 4rem 2rem;
+      color: var(--accent);
+      font-size: 1.3vw;
+      gap: 1rem;
+    }
+
+    .spinner {
+      width: 42px;
+      height: 42px;
+      border: 4px solid rgba(255, 79, 79, 0.2);
+      border-top: 4px solid var(--accent);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    #floatingGame {
+      position: fixed;
+      top: 12%;
+      left: 12%;
+      width: 76vw;
+      height: 72vh;
+      background: #111;
+      border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      display: none;
+      flex-direction: column;
+      z-index: 100000;
+      overflow: hidden;
+      opacity: 0;
+      transform: scale(0.65);
+      transition: all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    #floatingGame.show {
+      display: flex;
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    #notification-bar {
+      position: fixed;
+      top: 25px;
+      right: 25px;
+      z-index: 999999;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 340px;
+    }
+
+    .cac-notification {
+      background: #1f1f1f;
+      border-left: 5px solid var(--accent);
+      padding: 16px 20px;
+      border-radius: 14px;
+      box-shadow: 0 10px 35px rgba(0,0,0,0.7);
+      animation: slideIn 0.45s cubic-bezier(0.34,1.56,0.64,1) forwards;
+      color: white;
+    }
+
+    .cac-notification.hide {
+      animation: slideOut 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+    }
+
+    @keyframes slideIn {
+      from { transform: translateX(140%) scale(0.95); opacity: 0; }
+      to { transform: translateX(0) scale(1); opacity: 1; }
+    }
+
+    @keyframes slideOut {
+      from { transform: translateX(0); opacity: 1; }
+      to { transform: translateX(140%); opacity: 0; }
+    }
+
+    .gallery-container {
+      animation: galleryFadeIn 0.6s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    }
+
+    @keyframes galleryFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div id="app-fuk-u">
+  <div class="cac-sidebar" id="sidebar">
+    <div class="cac-header"></div>
+    <div class="sidebar-container">
+      <div class="cac-sidebar-background" id="sidebar-bg"></div>
+      <div class="nav-top" id="nav-top"></div>
+      <div class="nav-bottom" id="nav-bottom"></div>
+    </div>
+  </div>
+
+  <div class="main-wrapper">
+    <div id="gamesPage" class="maincontent">
+      <div class="maincontent-header">
+        <h1 class="maincontent-header-text">Games</h1>
+        <p class="page-description">very tufff games by truffled</p>
+      </div>
+
+      <div class="search-container">
+        <input type="text" id="searchInput" placeholder="search through 0 games"/>
+        <select id="categorySelect">
+          <option value="all">All Games</option>
+          <option value="recent">Recently Played</option>
+        </select>
+      </div>
+
+      <div id="recentSection" style="display: none;">
+        <h2 class="section-title">Recently Played</h2>
+        <div id="recentGallery" class="gallery-container"></div>
+      </div>
+
+      <div id="allSection">
+        <h2 class="section-title">All Games</h2>
+        <div id="loading" class="text-center py-12">
+          <div class="spinner"></div>
+          <div>Loading games...</div>
         </div>
-        <div id="updConfirmFrame"><button id="updConfirm">okay</button></div>
+        <div id="gameGallery" class="gallery-container"></div>
       </div>
+    </div>
 
-      
-      <div class="content-side">
-          <h1 class="typewriter"><span id="cursor"></span></h1>
-          <h2>version 10 / release build</h2>
-          <br>
-
-          <div class="button-container">
-              <div class="gamesbutton" onclick="window.location='games/index.html';">
-                  <img src="images/other/controller.png">
-                  <div class="button-text">
-                      <p>games</p>
-                  </div>
-              </div>
-          
-              <div class="gamesbutton" onclick="window.location='apps/index.html';">
-                  <a href="apps/index.html"><img src="images/other/apps.png"></a>
-                  <div class="button-text">
-                      <p>apps</p>
-                  </div>
-              </div>
-
-              <div class="gamesbutton" onclick="window.location='settings.html';">
-                <a href="settings.html"><img src="images/other/settings.png"></a>
-                <div class="button-text">
-                    <p>settings</p>
-                </div>
-            </div>
-          </div>
-          
-
-          <br>
-
-          <p class="linkp"><a href="/seraphim/index.html">mobile</a> • <a href="host.html">rehost</a> • <a id="openBlankLink">open blank</a></p>
-          <p class="linkp"><a href="https://discord.gg/ZyZDmx3zuQ" target="_blank">discord</a> • <a href="updatelog.html">update log</a> • <a href="https://github.com/a456pur/seraph" target="_blank">source code</a> </p>
-          
-          <br>
-          <a href="https://github.com/a456pur" target="_blank" style="text-decoration: none;">˗ˏˋ❀ website created/developed by @a456pur ❀ ´ˎ˗</a>
-        
+    <div id="settingsPage" class="maincontent">
+      <div class="maincontent-header">
+        <h1 class="maincontent-header-text">Settings</h1>
+        <p class="page-description">useful tools you may need</p>
       </div>
+      <div class="setting-card">
+        <h2>Tab Cloak</h2>
+        <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:12px;">
+          <button onclick="applyPreset('google.com')" class="cac-button">Google</button>
+          <button onclick="applyPreset('desmos.com')" class="cac-button">Desmos</button>
+        </div>
+        <input id="cloakTitle" placeholder="Custom Title" class="cac-input"/>
+        <input id="cloakUrl" placeholder="https://example.com" class="cac-input"/>
+        <button onclick="applyCustomCloak()" class="cac-button">Apply Custom Cloak</button>
+        <button onclick="resetCloak()" class="cac-button">Reset to Jaxson's Math</button>
+      </div>
+      <div class="setting-card">
+        <h2>Data</h2>
+        <button onclick="exportData()" class="cac-button" style="font-size:1.05vw;">Export Data</button>
+        <label class="cac-button" style="cursor:pointer; font-size:1.05vw;">Import Data <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display:none;"/></label>
+      </div>
+    </div>
 
-      <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/offline-worker.js').then(function(registration) {
-                    console.log('service worker initalised! scope:', registration.scope);
-        
-                    navigator.serviceWorker.addEventListener('message', function(event) {
-                        if (event.data === 'cached') {
-                            document.getElementById('cache-status').style.display = 'block';
-                        }
-                    });
-                }, function(error) {
-                    console.log('ack, error with serviceworker! ', error);
-                });
-            });
-        }
+    <div id="creditsPage" class="maincontent">
+      <div class="maincontent-header">
+        <h1 class="maincontent-header-text">Credits</h1>
+        <p class="page-description">i love skidding</p>
+      </div>
+      <div class="credits-card">
+        <h2>Jaxson's Math</h2>
+        <p>Made with ❤️ by jaxson bunch</p>
+      </div>
+      <div class="credits-card">
+        <h2>Games</h2>
+        <p>Game source: Truffled.lol</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-      </script>
+<div id="floatingGame">
+  <div id="gameHeader" style="background:var(--bg3); padding:1rem 1.5rem; display:flex; justify-content:space-between; align-items:center; cursor:move;">
+    <strong id="gameTitle">Game</strong>
+    <div style="display:flex; gap:8px;">
+      <button onclick="toggleFullscreen()" title="Fullscreen"><i class="fas fa-expand"></i></button>
+      <button onclick="closeFloatingGame()" title="Close"><i class="fas fa-times"></i></button>
+    </div>
+  </div>
+  <iframe id="gameFrame" style="flex:1; border:none; width:100%;" sandbox="allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+</div>
 
-      <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            if (!localStorage.getItem('v10-update')) {
-                document.getElementById('blackout').style.display = 'block';
-                document.getElementById('updPopup').style.display = 'block';
-                localStorage.setItem('v10-update', 'true');
-            }
-            document.getElementById('updConfirm').addEventListener('click', function () {
-                document.getElementById('blackout').style.display = 'none';
-                document.getElementById('updPopup').style.display = 'none';
-            });
-        });
-      </script>
-      <script>
-        const text = "seraph";
-        const typingDelay = 500; 
-        const initialDelay = 100; 
-        const cursor = document.getElementById("cursor");
-        const h1 = document.querySelector(".typewriter");
+<div id="notification-bar"></div>
 
-        function type() {
-            setTimeout(() => {
-                for (let i = 0; i < text.length; i++) {
-                setTimeout(() => {
-                    h1.textContent += text[i];
-                    if (i === text.length - 1) {
-                    cursor.style.display = "none"; 
-                    }
-                }, i * typingDelay);
-                }
-            }, initialDelay);
-        }
+<script>
+let currentPage = 'games';
+let gamesData = [];
+let currentGame = null;
+let recentlyPlayed = [];
 
-        type();
-      </script>
+const BASE_URL = "https://truffled.lol";
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            var openBlankLink = document.getElementById('openBlankLink');
-        
-            openBlankLink.addEventListener('click', function(event) {
-                event.preventDefault();
-        
-                var newTab = window.open('about:blank', '_blank');
-        
-                if (newTab) {
-                    var newTabBody = newTab.document.body;
-                    newTabBody.style.padding = '0';
-                    newTabBody.style.margin = '0';
-                    newTabBody.style.border = 'hidden';
-        
-                    var iframe = document.createElement('iframe');
-                    iframe.src = window.location.href;
-                    iframe.style.width = '100%';
-                    iframe.style.height = '100%';
-                    iframe.style.border = 'hidden';
+function loadRecentlyPlayed() {
+  const saved = localStorage.getItem('jaxsons_recent');
+  if (saved) recentlyPlayed = JSON.parse(saved);
+}
 
-                    iframe.onload = function() {
-                        var links = iframe.contentDocument.querySelectorAll('a[target="_blank"]');
-                        links.forEach(function(link) {
-                            link.addEventListener('click', function(event) {
-                                event.preventDefault();
-                                iframe.contentWindow.location.href = link.href;
-                            });
-                        });
-                    };
-        
-                    newTab.document.body.appendChild(iframe);
-                } else {
-                    alert("couldn't manage to open a new tab :(");
-                }
-            });
-        });
-        </script>    
+function saveRecentlyPlayed() {
+  localStorage.setItem('jaxsons_recent', JSON.stringify(recentlyPlayed));
+}
 
-      <script src="storage/js/cloak.js"></script>
-      <script src="storage/js/theme.js"></script>
-      <script src="storage/js/cookie.js"></script>
-  </body>
+function addToRecentlyPlayed(game) {
+  recentlyPlayed = recentlyPlayed.filter(g => g.name !== game.name);
+  recentlyPlayed.unshift(game);
+  if (recentlyPlayed.length > 20) recentlyPlayed.pop();
+  saveRecentlyPlayed();
+  renderRecentlyPlayed();
+}
+
+function renderRecentlyPlayed() {
+  const container = document.getElementById('recentGallery');
+  container.innerHTML = '';
+  if (recentlyPlayed.length === 0) {
+    container.innerHTML = '<p style="opacity:0.6; padding:1rem;">No recently played games yet.</p>';
+    return;
+  }
+  recentlyPlayed.forEach(game => {
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.textContent = game.name;
+    card.onclick = () => openGame(game);
+    container.appendChild(card);
+  });
+  container.classList.remove('gallery-container');
+  void container.offsetWidth;
+  container.classList.add('gallery-container');
+}
+
+async function listZones() {
+  const loading = document.getElementById('loading');
+  const gallery = document.getElementById('gameGallery');
+  loading.style.display = 'flex';
+  gallery.style.display = 'none';
+
+  try {
+    const response = await fetch('https://raw.githubusercontent.com/aukak/truffled/refs/heads/main/public/js/json/g.json?t=' + Date.now());
+    const data = await response.json();
+    
+    gamesData = data.games.map(game => ({
+      name: game.name,
+      url: BASE_URL + (game.url.startsWith('/') ? game.url : '/' + game.url)
+    })).sort((a, b) => a.name.localeCompare(b.name));
+
+    renderGames();
+    updateSearchPlaceholder();
+    renderRecentlyPlayed();
+  } catch (error) {
+    console.error(error);
+    gallery.innerHTML = `<div class="text-white text-center py-12">Failed to load games</div>`;
+  } finally {
+    loading.style.display = 'none';
+    gallery.style.display = 'flex';
+  }
+}
+
+function updateSearchPlaceholder() {
+  document.getElementById('searchInput').placeholder = `search through ${gamesData.length} games`;
+}
+
+function renderGames(filtered = null) {
+  const container = document.getElementById('gameGallery');
+  container.innerHTML = '';
+  const toRender = filtered || gamesData;
+
+  toRender.forEach((game) => {
+    const card = document.createElement('div');
+    card.className = 'game-card';
+    card.textContent = game.name;
+    card.onclick = () => openGame(game);
+    container.appendChild(card);
+  });
+  
+  container.classList.remove('gallery-container');
+  void container.offsetWidth;
+  container.classList.add('gallery-container');
+}
+
+function filterGames() {
+  const searchTerm = document.getElementById('searchInput').value.toLowerCase().trim();
+  const category = document.getElementById('categorySelect').value;
+  
+  let filtered = gamesData;
+  if (searchTerm) filtered = filtered.filter(g => g.name.toLowerCase().includes(searchTerm));
+
+  if (category === 'recent') {
+    document.getElementById('recentSection').style.display = 'block';
+    document.getElementById('allSection').style.display = 'none';
+    renderRecentlyPlayed();
+  } else {
+    document.getElementById('recentSection').style.display = 'none';
+    document.getElementById('allSection').style.display = 'block';
+    renderGames(filtered);
+  }
+}
+
+function openGame(game) {
+  addToRecentlyPlayed(game);
+  currentGame = game;
+  document.getElementById('gameTitle').textContent = game.name;
+  document.getElementById('gameFrame').src = game.url;
+  const floating = document.getElementById('floatingGame');
+  floating.style.transition = 'none';
+  floating.style.transform = 'scale(0.65)';
+  floating.style.opacity = '0';
+  floating.classList.add('show');
+  setTimeout(() => {
+    floating.style.transition = 'all 0.45s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    floating.style.transform = 'scale(1)';
+    floating.style.opacity = '1';
+  }, 10);
+}
+
+function closeFloatingGame() {
+  const floating = document.getElementById('floatingGame');
+  floating.style.transform = 'scale(0.65)';
+  floating.style.opacity = '0';
+  setTimeout(() => {
+    floating.classList.remove('show');
+    document.getElementById('gameFrame').src = '';
+    currentGame = null;
+  }, 380);
+}
+
+function toggleFullscreen() {
+  const floating = document.getElementById('floatingGame');
+  if (!document.fullscreenElement) floating.requestFullscreen();
+  else document.exitFullscreen();
+}
+
+document.addEventListener('fullscreenchange', () => {
+  const header = document.getElementById('gameHeader');
+  if (document.fullscreenElement) header.style.display = 'none';
+  else header.style.display = 'flex';
+});
+
+function showNotification(title, msg) {
+  const bar = document.getElementById('notification-bar');
+  const notif = document.createElement('div');
+  notif.className = 'cac-notification';
+  notif.innerHTML = `<strong>${title}</strong><br><span style="opacity:0.9;">${msg}</span>`;
+  bar.appendChild(notif);
+  setTimeout(() => {
+    notif.classList.add('hide');
+    setTimeout(() => notif.remove(), 400);
+  }, 4200);
+}
+
+function showPage(page) {
+  const allPages = document.querySelectorAll('.maincontent');
+  const currentActive = document.querySelector('.maincontent.active');
+  const targetPage = document.getElementById(page + 'Page');
+
+  if (currentActive === targetPage) return;
+
+  if (currentActive) {
+    currentActive.style.transition = 'all 0.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    currentActive.style.opacity = '0';
+    currentActive.style.transform = 'translateY(30px)';
+  }
+
+  setTimeout(() => {
+    allPages.forEach(p => {
+      p.classList.remove('active');
+      p.style.pointerEvents = 'none';
+    });
+
+    targetPage.style.transition = 'none';
+    targetPage.style.opacity = '0';
+    targetPage.style.transform = 'translateY(40px)';
+    targetPage.classList.add('active');
+    targetPage.style.pointerEvents = 'all';
+    targetPage.scrollTop = 0;
+
+    void targetPage.offsetWidth;
+
+    targetPage.style.transition = 'all 0.65s cubic-bezier(0.23, 1, 0.32, 1)';
+    targetPage.style.opacity = '1';
+    targetPage.style.transform = 'translateY(0)';
+  }, 180);
+
+  currentPage = page;
+  updateHighlight();
+  localStorage.setItem('lastPage', page);
+}
+
+function updateHighlight() {
+  const bg = document.getElementById('sidebar-bg');
+  const buttons = document.querySelectorAll('.cac-sidebar-button');
+  let active = null;
+
+  buttons.forEach(btn => {
+    if (btn.textContent.toLowerCase().includes(currentPage.toLowerCase())) {
+      active = btn;
+    }
+  });
+
+  if (active) {
+    bg.style.top = `${active.offsetTop}px`;
+  }
+}
+
+function normalize(url) {
+  if (!url) return null;
+  if (!url.startsWith('http')) url = 'https://' + url;
+  try { return new URL(url); } catch { return null; }
+}
+
+function updateFavicon(favUrl) {
+  let link = document.querySelector("link[rel~='icon']");
+  if (!link) {
+    link = document.createElement('link');
+    link.rel = 'icon';
+    document.head.appendChild(link);
+  }
+  link.href = favUrl;
+}
+
+function saveCloak(title, favUrl) {
+  localStorage.setItem('cloakTitle', title);
+  localStorage.setItem('cloakFavicon', favUrl);
+}
+
+function loadCloak() {
+  const title = localStorage.getItem('cloakTitle');
+  const fav = localStorage.getItem('cloakFavicon');
+  if (title) document.title = title;
+  if (fav) updateFavicon(fav);
+}
+
+function applyPreset(domain) {
+  const url = normalize(domain);
+  if (!url) return;
+  let title = domain.includes("google") ? "Google" : domain.includes("desmos") ? "Desmos" : url.hostname;
+  document.title = title;
+  const favUrl = `https://www.google.com/s2/favicons?sz=64&domain=${url.hostname}`;
+  updateFavicon(favUrl);
+  saveCloak(title, favUrl);
+  showNotification("Tab Cloak", `Switched to ${title}`);
+}
+
+function applyCustomCloak() {
+  const titleInput = document.getElementById("cloakTitle").value.trim();
+  const urlInput = document.getElementById("cloakUrl").value.trim();
+  const url = normalize(urlInput);
+  if (!url) return;
+  const finalTitle = titleInput || url.hostname;
+  document.title = finalTitle;
+  const favUrl = `https://www.google.com/s2/favicons?sz=64&domain=${url.hostname}`;
+  updateFavicon(favUrl);
+  saveCloak(finalTitle, favUrl);
+  showNotification("Tab Cloak", "Custom cloak applied");
+}
+
+function resetCloak() {
+  document.title = "Jaxson's Math";
+  const defaultFavicon = "https://raw.githubusercontent.com/tazzyalt/jaxsonsmath/refs/heads/main/logo.png?token=GHSAT0AAAAAAEAE4FJSWDKMNF52UV3BAQAS2RWAA5A";
+  updateFavicon(defaultFavicon);
+  saveCloak("Jaxson's Math", defaultFavicon);
+  showNotification("Tab Cloak", "Reset to default");
+}
+
+function exportData() {
+  const data = {
+    recentlyPlayed,
+    cloakTitle: localStorage.getItem('cloakTitle'),
+    cloakFavicon: localStorage.getItem('cloakFavicon'),
+    lastPage: currentPage
+  };
+  const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = 'jaxsons-math-backup.json';
+  a.click();
+  URL.revokeObjectURL(url);
+  showNotification("Data", "Exported successfully");
+}
+
+function importData(event) {
+  const file = event.target.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const data = JSON.parse(e.target.result);
+      if (data.recentlyPlayed) {
+        recentlyPlayed = data.recentlyPlayed;
+        saveRecentlyPlayed();
+        renderRecentlyPlayed();
+      }
+      if (data.cloakTitle) localStorage.setItem('cloakTitle', data.cloakTitle);
+      if (data.cloakFavicon) {
+        localStorage.setItem('cloakFavicon', data.cloakFavicon);
+        updateFavicon(data.cloakFavicon);
+      }
+      if (data.lastPage) showPage(data.lastPage);
+      showNotification("Data", "Imported successfully");
+    } catch (err) {
+      showNotification("Error", "Failed to import data");
+    }
+  };
+  reader.readAsText(file);
+}
+
+function init() {
+  loadRecentlyPlayed();
+  loadCloak();
+
+  const topNav = document.getElementById('nav-top');
+  const bottomNav = document.getElementById('nav-bottom');
+
+  const topItems = [
+    {id: 'games', name: 'Games', icon: 'fa-gamepad'},
+    {id: 'settings', name: 'Settings', icon: 'fa-cog'}
+  ];
+
+  const bottomItem = {id: 'credits', name: 'Credits', icon: 'fa-copyright'};
+
+  topItems.forEach(item => {
+    const btn = document.createElement('div');
+    btn.className = 'cac-sidebar-button';
+    btn.innerHTML = `<i class="fas ${item.icon}"></i> <span>${item.name}</span>`;
+    btn.onclick = () => showPage(item.id);
+    topNav.appendChild(btn);
+  });
+
+  const creditsBtn = document.createElement('div');
+  creditsBtn.className = 'cac-sidebar-button';
+  creditsBtn.innerHTML = `<i class="fas ${bottomItem.icon}"></i> <span>${bottomItem.name}</span>`;
+  creditsBtn.onclick = () => showPage(bottomItem.id);
+  bottomNav.appendChild(creditsBtn);
+
+  const savedPage = localStorage.getItem('lastPage') || 'games';
+  currentPage = savedPage;
+
+  document.querySelectorAll('.maincontent').forEach(p => {
+    p.classList.remove('active');
+    p.style.transition = 'none';
+    p.style.opacity = '0';
+    p.style.transform = 'translateY(30px)';
+    p.style.pointerEvents = 'none';
+  });
+
+  const targetPage = document.getElementById(savedPage + 'Page');
+  if (targetPage) {
+    targetPage.classList.add('active');
+    targetPage.style.transition = 'none';
+    targetPage.style.opacity = '0';
+    targetPage.style.transform = 'translateY(30px)';
+    targetPage.style.pointerEvents = 'all';
+    targetPage.scrollTop = 0;
+
+    void targetPage.offsetWidth;
+
+    targetPage.style.transition = 'all 0.65s cubic-bezier(0.23, 1, 0.32, 1)';
+    targetPage.style.opacity = '1';
+    targetPage.style.transform = 'translateY(0)';
+  }
+
+  setTimeout(() => updateHighlight(), 120);
+
+  listZones();
+
+  const searchInput = document.getElementById('searchInput');
+  const categorySelect = document.getElementById('categorySelect');
+  searchInput.addEventListener('input', filterGames);
+  categorySelect.addEventListener('change', filterGames);
+
+  const floating = document.getElementById('floatingGame');
+  const header = document.getElementById('gameHeader');
+  let isDragging = false, x, y;
+
+  header.addEventListener('mousedown', e => {
+    if (e.target.tagName === 'BUTTON') return;
+    isDragging = true;
+    x = e.clientX - floating.offsetLeft;
+    y = e.clientY - floating.offsetTop;
+  });
+
+  document.addEventListener('mousemove', e => {
+    if (!isDragging) return;
+    floating.style.left = (e.clientX - x) + 'px';
+    floating.style.top = (e.clientY - y) + 'px';
+  });
+
+  document.addEventListener('mouseup', () => isDragging = false);
+
+  if (!localStorage.getItem('cloakFavicon')) {
+    const defaultFavicon = "https://raw.githubusercontent.com/tazzyalt/jaxsonsmath/refs/heads/main/logo.png?token=GHSAT0AAAAAAEAE4FJSWDKMNF52UV3BAQAS2RWAA5A";
+    updateFavicon(defaultFavicon);
+    saveCloak("Jaxson's Math", defaultFavicon);
+  }
+
+  setTimeout(() => {
+    document.getElementById('app-fuk-u').classList.add('loaded');
+    document.getElementById('sidebar').classList.add('loaded');
+    
+    const quotes = [
+      "my water bottle is empty rn",
+      "i should probably touch grass",
+      "larping is the key to hapiness",
+      "who needs a education anyway"
+    ];
+    
+    const randomQuote = quotes[Math.floor(Math.random() * quotes.length)];
+    showNotification("Jaxson's Math", randomQuote);
+  }, 100);
+}
+
+window.onload = init;
+</script>
+</body>
 </html>
