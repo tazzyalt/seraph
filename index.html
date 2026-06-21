@@ -491,7 +491,7 @@
       <div class="setting-card">
         <h2>Data</h2>
         <button onclick="exportData()" class="cac-button" style="font-size:1.05vw;">Export Data</button>
-        <label class="cac-button" style="cursor:pointer; font-size:1.05vw;">Import Data <input type="file" id="importFile" accept=".json" onchange="importData(event)" style="display:none;"/></label>
+        <label class="cac-button" style="cursor:pointer; font-size:1.05vw;">Import Data <input type="file" id="importFile" accept=".data" onchange="importData(event)" style="display:none;"/></label>
       </div>
     </div>
 
@@ -507,6 +507,10 @@
       <div class="credits-card">
         <h2>Games</h2>
         <p>Game Source: Seraph</p>
+      </div>
+      <div class="credits-card">
+        <h2>Apps</h2>
+        <p>App Source: Seraph</p>
       </div>
     </div>
   </div>
@@ -532,7 +536,7 @@ let appsData = [];
 let currentItem = null;
 let recentlyPlayed = [];
 
-const BASE_URL = "";  // Leave empty for relative paths (same domain)
+const BASE_URL = "";
 
 function loadRecentlyPlayed() {
   const saved = localStorage.getItem('jaxsons_recent');
@@ -632,7 +636,6 @@ function renderGames(filtered = null) {
   const container = document.getElementById('gameGallery');
   container.innerHTML = '';
   const toRender = filtered || gamesData;
-
   toRender.forEach(item => {
     const card = document.createElement('div');
     card.className = 'game-card';
@@ -649,7 +652,6 @@ function renderApps(filtered = null) {
   const container = document.getElementById('appsGallery');
   container.innerHTML = '';
   const toRender = filtered || appsData;
-
   toRender.forEach(item => {
     const card = document.createElement('div');
     card.className = 'app-card';
@@ -855,7 +857,7 @@ function applyCustomCloak() {
 
 function resetCloak() {
   document.title = "Jaxson's Math";
-  const defaultFavicon = "/images/logo.png";
+  const defaultFavicon = "v.png";
   updateFavicon(defaultFavicon);
   saveCloak("Jaxson's Math", defaultFavicon);
   showNotification("Tab Cloak", "Reset to default");
@@ -872,10 +874,10 @@ function exportData() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'jaxsons-math-backup.json';
+  a.download = 'jaxsons-math-backup.data';
   a.click();
   URL.revokeObjectURL(url);
-  showNotification("Data", "Exported successfully");
+  showNotification("Data", "Backup exported successfully! Save this file.");
 }
 
 function importData(event) {
@@ -896,9 +898,9 @@ function importData(event) {
         updateFavicon(data.cloakFavicon);
       }
       if (data.lastPage) showPage(data.lastPage);
-      showNotification("Data", "Imported successfully");
+      showNotification("Data", "Backup imported successfully");
     } catch (err) {
-      showNotification("Error", "Failed to import data");
+      showNotification("Error", "Failed to import backup");
     }
   };
   reader.readAsText(file);
